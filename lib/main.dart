@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    selectedGranularity = granularities.first; // Initialize in initState
+    selectedGranularity = granularities.first;
   }
 
 
