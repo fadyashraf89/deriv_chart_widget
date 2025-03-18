@@ -151,7 +151,7 @@ class _MyAppState extends State<MyApp> {
       close: 1000,
     ),
   ];
-  final List<int> granularities = [60, 3600, 86400, 31536000, 3153600000];
+  final List<int> granularities = [60, 3600, 86400, 31536000, 3153600000, 30655618];
 
   late int selectedGranularity;
   final ChartController controller = ChartController();
