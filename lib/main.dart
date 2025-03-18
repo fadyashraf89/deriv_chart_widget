@@ -2,6 +2,7 @@ import 'package:deriv_chart/deriv_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'GranularityButton.dart';
+import 'TimeValues.dart';
 import 'graph_widget.dart';
 
 void main() {
@@ -151,7 +152,14 @@ class _MyAppState extends State<MyApp> {
       close: 1000,
     ),
   ];
-  final List<int> granularities = [60, 3600, 86400, 31536000, 3153600000, 30655618];
+  final List<TimeValues> granularities = [
+    TimeValues.OneDay,
+    TimeValues.OneWeek,
+    TimeValues.OneMonth,
+    TimeValues.OneYear,
+    TimeValues.SixMonths,
+    TimeValues.FiveYears,
+  ];
 
   late int selectedGranularity;
   final ChartController controller = ChartController();
@@ -168,10 +176,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    selectedGranularity = granularities.first;
+    selectedGranularity = granularities.first.seconds;
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +192,9 @@ class _MyAppState extends State<MyApp> {
                 children: [
                   IconButton(
                     icon: Icon(
-                      isCandleChart ? Icons.show_chart : Icons.candlestick_chart,
+                      isCandleChart
+                          ? Icons.show_chart
+                          : Icons.candlestick_chart,
                     ),
                     onPressed: () {
                       setState(() {
@@ -196,13 +204,12 @@ class _MyAppState extends State<MyApp> {
                   ),
                   Expanded(
                     child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal ,
-                      child: GranularityButton(
+                      scrollDirection: Axis.horizontal,
+                      child: GranularityDropdown(
                         onGranularityChanged: (granularity) {
                           setState(() {
                             selectedGranularity = granularity;
                           });
-                          print("Selected granularity: $granularity");
                         },
                         granularities: granularities,
                       ),
